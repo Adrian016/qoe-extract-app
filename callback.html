@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Authorization received — QoE Extract</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+           max-width: 720px; margin: 3rem auto; padding: 0 1.25rem; line-height: 1.55; color: #1a1a1a; }
+    h1 { margin-bottom: .25rem; }
+    .sub { color: #555; margin-top: 0; }
+    .ok { color: #137333; font-weight: 600; }
+    .err { color: #b3261e; font-weight: 600; }
+    code { background: #f3f3f3; padding: 2px 6px; border-radius: 4px; font-size: .95em;
+           word-break: break-all; }
+    button { background: #0a58ca; color: #fff; border: 0; border-radius: 6px;
+             padding: .55rem 1rem; font-size: 1em; cursor: pointer; margin-right: .5rem; }
+    button:hover { background: #084298; }
+    .row { margin: .5rem 0; }
+    .label { display: inline-block; min-width: 90px; color: #555; }
+    .url-box { background: #f7f7f7; border: 1px solid #ddd; border-radius: 6px;
+               padding: .75rem; margin: 1rem 0; word-break: break-all; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .9em; }
+  </style>
+</head>
+<body>
+  <h1>Authorization received</h1>
+  <p class="sub" id="status">Checking parameters...</p>
+
+  <p>Copy the URL below and paste it back into your terminal when prompted:</p>
+
+  <div class="url-box" id="full-url"></div>
+  <button id="copy-url">Copy URL</button>
+
+  <h3>Individual values</h3>
+  <div class="row"><span class="label">Auth code:</span> <code id="code"></code></div>
+  <div class="row"><span class="label">State:</span> <code id="state"></code></div>
+  <div class="row"><span class="label">Realm ID:</span> <code id="realm"></code></div>
+
+  <p style="margin-top:2rem;color:#777;font-size:.9em;">
+    You can close this tab once you've pasted the URL into your terminal.
+  </p>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const code = params.get('code');
+    const state = params.get('state');
+    const realm = params.get('realmId');
+    const error = params.get('error');
+
+    document.getElementById('full-url').textContent = location.href;
+    document.getElementById('code').textContent = code || '(missing)';
+    document.getElementById('state').textContent = state || '(missing)';
+    document.getElementById('realm').textContent = realm || '(missing)';
+
+    const status = document.getElementById('status');
+    if (error) {
+      status.textContent = 'Authorization error: ' + error;
+      status.className = 'sub err';
+    } else if (code && state && realm) {
+      status.textContent = 'Authorization successful.';
+      status.className = 'sub ok';
+    } else {
+      status.textContent = 'Some parameters are missing — check the URL.';
+      status.className = 'sub err';
+    }
+
+    document.getElementById('copy-url').addEventListener('click', () => {
+      navigator.clipboard.writeText(location.href).then(
+        () => { document.getElementById('copy-url').textContent = 'Copied!'; },
+        () => { alert('Copy failed — select the URL above manually.'); }
+      );
+    });
+  </script>
+</body>
+</html>
