@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>QoE Extract</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+           max-width: 720px; margin: 3rem auto; padding: 0 1.25rem; line-height: 1.55; color: #1a1a1a; }
+    h1 { margin-bottom: .25rem; }
+    .sub { color: #555; margin-top: 0; }
+    h2 { margin-top: 2rem; }
+    code { background: #f3f3f3; padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+    a { color: #0a58ca; }
+    hr { border: 0; border-top: 1px solid #eee; margin: 2rem 0; }
+    footer { color: #777; font-size: .9em; }
+  </style>
+</head>
+<body>
+  <h1>QoE Extract</h1>
+  <p class="sub">A private, self-hosted tool for extracting financial reports from QuickBooks Online for buy-side Quality of Earnings analysis.</p>
+
+  <h2>About</h2>
+  <p>QoE Extract is a single-user command-line utility used to pull historical accounting reports
+     (AR aging, P&amp;L, balance sheet, etc.) from a QuickBooks Online company that the operator
+     has been authorized to access. The tool runs locally on the operator's own computer; no data
+     is transmitted to any third-party server.</p>
+
+  <h2>Connect</h2>
+  <p>To connect the tool to a QuickBooks Online company, run the CLI locally and follow the
+     in-terminal instructions. You will be redirected to Intuit's authorization page to log in
+     and select the company you want to grant read access to.</p>
+
+  <h2>Reconnect</h2>
+  <p>If access tokens expire or are revoked, rerun the CLI's authorization command to obtain
+     fresh credentials. Reconnection follows the same flow as the initial connection.</p>
+
+  <h2>Disconnect</h2>
+  <p>To disconnect QoE Extract from your QuickBooks Online company at any time, log in to
+     QuickBooks Online and visit
+     <a href="https://qbo.intuit.com/app/connectedapps">Apps &rarr; My Apps</a>,
+     locate this application in the list, and choose <em>Disconnect</em>. You may also delete
+     the locally stored token file on the machine running the tool.</p>
+
+  <h2>Legal</h2>
+  <ul>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+    <li><a href="eula.html">End-User License Agreement</a></li>
+  </ul>
+
+  <hr>
+  <footer>For support inquiries, contact the operator listed in the Intuit app registration.</footer>
+</body>
+</html>
